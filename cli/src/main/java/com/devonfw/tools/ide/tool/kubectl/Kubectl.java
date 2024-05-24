@@ -10,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Set;
 
+/**
+ * {@link GlobalToolCommandlet} for <a href="https://kubernetes.io/docs/reference/kubectl/">kubernetes command line tool</a> (kubectl)
+ */
 public class Kubectl extends GlobalToolCommandlet {
   /**
    * The constructor.
@@ -24,7 +27,6 @@ public class Kubectl extends GlobalToolCommandlet {
   @Override
   public boolean install(boolean silent) {
 
-    // no installation for kubectl itself, delegate installation to Docker without calling super.install(silent)
     if (doIsKubernetesInstalled() && !this.context.isForceMode()) {
       IdeLogLevel level = silent ? IdeLogLevel.DEBUG : IdeLogLevel.INFO;
       this.context.level(level).log("{} is already installed at {}", this.tool, this.context.getPath().findBinary(Path.of(getBinaryName())));
